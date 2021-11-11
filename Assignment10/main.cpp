@@ -65,7 +65,7 @@ void programOne(void)
     createdBranches(root);
     createdLeaves(root);
     deleteTree(root);
-    system("pause");
+    pause("\n\t\t\Press Enter to continue . . .");
 }
 
 
