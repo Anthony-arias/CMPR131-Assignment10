@@ -60,7 +60,12 @@ void programOne(void)
     clearScreen();
     cout << "\t1> Tree of strings" << endl;
     cout << "\t" + string(100, char(196)) << endl;
-    /*stuff here*/
+    binary_tree_node<string>* root = new binary_tree_node<string>;
+    createdRoot(root);
+    createdBranches(root);
+    createdLeaves(root);
+    deleteTree(root);
+    system("pause");
 }
 
 
