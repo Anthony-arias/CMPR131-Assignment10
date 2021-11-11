@@ -8,6 +8,9 @@
 
 using namespace std;
 
+
+//PreCondition: input binary tree node
+//PostCondition: create root node
 void createdRoot(binary_tree_node<string>* &root)
 {
     root->setData("Trunk");
@@ -16,6 +19,8 @@ void createdRoot(binary_tree_node<string>* &root)
     print_tree("\t\t", root, false, true, false);
 }
 
+//PreCondition: input binary tree node
+//PostCondition: create two branches for the tree
 void createdBranches(binary_tree_node<string>*& root)
 {
     binary_tree_node<string>* branch1 = new binary_tree_node<string>;
@@ -33,6 +38,8 @@ void createdBranches(binary_tree_node<string>*& root)
     print_tree("\t\t", root, false, true, false);
 }
 
+//PreCondition: input binary tree node
+//PostCondition: create leaves for the tree
 void createdLeaves(binary_tree_node<string>*& root)
 {
     cout << "\n\tC> Branches grows leaves.\n";
@@ -77,6 +84,9 @@ void createdLeaves(binary_tree_node<string>*& root)
     print_tree("\t\t", root, false, true, false);
 }
 
+
+//PreCondition: input binary tree node
+//PostCondition: delete the tree
 void deleteTree(binary_tree_node<string>*& root)
 {
     cout << "\n\tF> Delete tree.\n";

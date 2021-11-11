@@ -25,52 +25,72 @@ public:
         right = init_right;
     }
 
-    
+
+    //PreCondition: NA
+    //PostCondition: return value of the node    
     Item& getData()
     {
         return data;
     }
 
+    //PreCondition: NA
+    //PostCondition: return left node
     binary_tree_node*& getLeft()
     {
         return left;
     }
 
+    //PreCondition: NA
+    //PostCondition: return right node
     binary_tree_node*& getRight()
     {
         return right;
     }
 
+    //PreCondition: NA
+    //PostCondition: set data for the node
     void setData(const Item& new_data)
     {
         data = new_data;
     }
 
+    //PreCondition: NA
+    //PostCondition: set left node
     void setLeft(binary_tree_node* new_left)
     {
         left = new_left;
     }
 
+    //PreCondition: NA
+    //PostCondition: set right node
     void setRight(binary_tree_node* new_right)
     {
         right = new_right;
     }
 
+    //PreCondition: NA
+    //PostCondition: return value of the node
     const Item& getData() const
     {
         return data;
     }
-    
+
+    //PreCondition: NA
+    //PostCondition: return left node
     const binary_tree_node* getLeft() const
     {
         return left;
     }
 
+    //PreCondition: NA
+    //PostCondition: return right node
     const binary_tree_node* getRight() const
     {
         return right;
     }
-  
+
+    //PreCondition: NA
+    //PostCondition: return true if the node is a leaf node, otherwise return false
     bool isLeaf() const
     {
         return (left == NULL && right == NULL);
@@ -78,6 +98,8 @@ public:
 
 };
 
+//PreCondition: input binary tree node
+//PostCondition: delete the tree using recurive
 template<class Item>
 void delete_tree(binary_tree_node<Item>* leaf) // Recursive
 {
@@ -93,6 +115,9 @@ void delete_tree(binary_tree_node<Item>* leaf) // Recursive
     delete leaf;
 
 }
+
+//PreCondition: input prefix(string), binary tree node, isLeft, root and last
+//PostCondition: displays the tree on the screen
 
 template<class Item>
 void print_tree(const string& prefix, const binary_tree_node<Item>* node, bool isLeft, bool root, bool last)
