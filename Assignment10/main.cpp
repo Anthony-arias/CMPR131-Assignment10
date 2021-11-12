@@ -207,7 +207,7 @@ void displayMainMenu(void)
 }
 
 //PreCondition: NA
-//PostCondition:
+//PostCondition: display option Two's menu
 void displayOptionTwoMenu(void)
 {
     cout << "\t\tA> Insert a node/leaf" << endl;
@@ -223,7 +223,7 @@ void displayOptionTwoMenu(void)
 }
 
 //PreCondition: NA
-//PostCondition:
+//PostCondition: display option Three's menu
 void displayOptionThreeMenu(void)
 {
     cout << "\n\tA game tree for a simple game of ""animal"" twenty questions would look like:" << endl;
