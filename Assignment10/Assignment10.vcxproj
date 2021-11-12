@@ -142,6 +142,8 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="binary_tree_node.h" />
+    <ClInclude Include="bTree.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="optionOne.h" />
     <ClInclude Include="optionThree.h" />
