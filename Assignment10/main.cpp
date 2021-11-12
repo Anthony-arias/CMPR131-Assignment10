@@ -13,6 +13,9 @@
 #include "input.h"
 #include "bTree.h"
 
+#include "binary_tree_node.h"
+
+
 void displayMainMenu(void);
 void mainMenu(void);
 void programOne(void);
@@ -54,7 +57,7 @@ void mainMenu(void)
 }
 
 //PreCondition: NA
-//PostCondition: 
+//PostCondition: show the contents for option 1
 void programOne(void)
 {
     clearScreen();
@@ -70,7 +73,7 @@ void programOne(void)
 
 
 //PreCondition: NA
-//PostCondition: 
+//PostCondition: show the contents for option 2
 void programTwo(void)
 {
     bTree<int> intTree = bTree<int>();
@@ -131,30 +134,63 @@ void programTwo(void)
         }
 
     } while (true);
+
 }
 
 //PreCondition: NA
-//PostCondition: 
+//PostCondition: show the contents for option 3
 void programThree(void)
 {   
+    binary_tree_node<string>* taxonomy_root_ptr;
+    string fileName = "animals.txt";
+    ifstream infile;
+    ofstream outfile;
+
+    //populate tree
+    infile.open(fileName);
+    if (infile.is_open())
+    {
+        readTreeFromFile(taxonomy_root_ptr, infile);
+    }
+    else
+    {
+        taxonomy_root_ptr = default_tree();
+    }
+    infile.close();
+
     do
     {
         clearScreen();
         cout << "\t3> Animal Guessing Game" << endl;
         cout << "\t" + string(100, char(205)) << endl;
         displayOptionThreeMenu();
-
-        int userInput = inputChar("\t\tOption: ");
+      
+        char userInput = inputChar("\t\tOption: ");
         switch (userInput)
         {
         case '0': return;
-        case 'a': case 'A': /*Function here*/ break;
-        case 'b': case 'B': /*Function here*/ break;
-        default: cout << "\t\tERROR-1A: Invalid input. Must be '0','A','B'" << endl; pause("");
+        case 'a': case 'A': 				
+            play(taxonomy_root_ptr);
+            system("pause"); 
+            break;
+        case 'b': case 'B':
+            outfile.open(fileName);
+            if (outfile.is_open())
+            {
+                writeTreeToFile(taxonomy_root_ptr, outfile);
+            }
+            outfile.close();
+
+            cout << "\n\tCurrent taxonomy tree saved to file " << fileName << "\n";
+            system("pause");
+            break;
+        default: 
+            cout << "\t\tERROR-1A: Invalid input. Must be '0','A','B'" << endl; 
+            pause("");
         }
 
     } while (true);
-    
+    delete_tree<string>(taxonomy_root_ptr);
 }
 
 
@@ -173,7 +209,7 @@ void displayMainMenu(void)
 }
 
 //PreCondition: NA
-//PostCondition:
+//PostCondition: display option Two's menu
 void displayOptionTwoMenu(void)
 {
     cout << "\t\tA> Insert a node/leaf" << endl;
@@ -189,7 +225,7 @@ void displayOptionTwoMenu(void)
 }
 
 //PreCondition: NA
-//PostCondition:
+//PostCondition: display option Three's menu
 void displayOptionThreeMenu(void)
 {
     cout << "\n\tA game tree for a simple game of ""animal"" twenty questions would look like:" << endl;
