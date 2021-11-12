@@ -12,6 +12,7 @@ public:
 	template<class T>
 	friend class bTree;
 
+	// Constructor
 	TreeNode(const T& _data = T(), TreeNode* _leftNode = NULL, TreeNode* _rightNode = NULL)
 		:data(_data), leftNode(_leftNode), rightNode(_rightNode)
 	{}
@@ -29,24 +30,28 @@ private:
 	TreeNode<T>* root;
 	int nodeCount;
 public:
+	// Default constructor
 	bTree()
 	{
 		root = NULL;
 		nodeCount = 0;
 	}
-
+	// Argument constructor
 	bTree(const T& _data)
 	{
 		TreeNode<T>* temp = new TreeNode<int>(_data);
 		root = temp;
 		nodeCount = 0;
 	}
-
+	
+	// Destructor
 	~bTree()
 	{
 		deleteTree();
 	}
 
+	// Precondition: root might be NULL
+	// Postcondition: push value by calling 'insert' function
 	void push(const T& _data)
 	{
 		TreeNode<T>* thisNode = new TreeNode<T>(_data);
@@ -55,6 +60,8 @@ public:
 		insert(thisNode, currentNode);
 	}
 
+	// Precondition: NA
+	// Postcondition: insert value by using recursion
 	void insert(TreeNode<T>* thisNode, TreeNode<T>* currentNode)
 	{
 		if (thisNode->data < currentNode->data || thisNode->data == currentNode->data) 
@@ -77,7 +84,8 @@ public:
 		}
 	}
 
-
+	// Precondition: NA
+	// Postcondition: print the contents in pre-order traversal
 	void printPreOrder(void)
 	{
 		if (root == NULL) throw invalid_argument("ERROR: bTree is empty.");
@@ -85,6 +93,8 @@ public:
 		iteratePreOrder(currentNode);
 	}
 
+	// Precondition: NA
+	// Postcondition: using pointer to access the node from left side and right side using pre-order traversal method
 	void iteratePreOrder(TreeNode<T>* currentNode)
 	{
 		if (currentNode != NULL)
@@ -97,6 +107,8 @@ public:
 		iteratePreOrder(currentNode->rightNode);
 	}
 
+	// Precondition: NA
+	// Postcondition: print the contents in in-order traversal
 	void printInOrder(void)
 	{
 		if (root == NULL) throw invalid_argument("ERROR: bTree is empty.");
@@ -104,6 +116,8 @@ public:
 		iterateInOrder(currentNode);
 	}
 
+	// Precondition: NA
+	// Postcondition: using pointer to access the node from left side and right side using in-order traversal method
 	void iterateInOrder(TreeNode<T>* currentNode)
 	{
 		if (currentNode != NULL)
@@ -115,6 +129,8 @@ public:
 		iterateInOrder(currentNode->rightNode);
 	}
 
+	// Precondition: NA
+	// Postcondition: print the contents in post-order traversal
 	void printPostOrder(void)
 	{
 		if (root == NULL) throw invalid_argument("ERROR: bTree is empty.");
@@ -122,6 +138,8 @@ public:
 		iteratePostOrder(currentNode);
 	}
 
+	// Precondition: NA
+	// Postcondition: using pointer to access the node from left side and right side using post-order traversal method
 	void iteratePostOrder(TreeNode<T>* currentNode)
 	{
 		if (currentNode != NULL)
@@ -133,7 +151,8 @@ public:
 		std::cout << "\t\t" << currentNode->data << std::endl;
 	}
 
-
+	// Precondition: NA
+	// Postcondition: delete the tree
 	void deleteTree(void)
 	{
 		if (root == NULL) throw invalid_argument("ERROR: bTree is empty.");
@@ -143,6 +162,8 @@ public:
 		nodeCount = 0;
 	}
 
+	// Precondition: NA
+	// Postcondition: using pointer to access the node from left side and right side using post-order traversal method, and delete the current node
 	void iteratePostOrderDelete(TreeNode<T>* currentNode)
 	{
 		if (currentNode != NULL)
@@ -154,7 +175,8 @@ public:
 		delete currentNode;
 	}
 
-
+	// Precondition: NA
+	// Postcondition: return the number of nodes in the tree
 	int countNodes(void)
 	{
 		nodeCount = 0;
@@ -163,6 +185,8 @@ public:
 		return nodeCount;
 	}
 
+	// Precondition: NA
+	// Postcondition: using pointer to access the node from left side and right side using post-order traversal method, and count the nodes in the tree
 	void iteratePostOrderCount(TreeNode<T>* currentNode)
 	{
 		if (currentNode != NULL)
@@ -174,7 +198,8 @@ public:
 		nodeCount++;
 	}
 
-
+	// Precondition: valid node that needs to be found
+	// Postcondition: return true if node has been found
 	bool searchNode(T nodeData)
 	{
 		if (root == NULL) throw invalid_argument("ERROR: bTree is empty.");
@@ -184,6 +209,8 @@ public:
 		return nodeFound;
 	}
 
+	// Precondition: NA
+	// Postcondition: using pointer to access the node from left side and right side using post-order traversal method, and find the indicated node in the tree
 	void iteratePostOrderSearch(TreeNode<T>* currentNode, bool& nodeFound, T nodeData)
 	{
 		if (currentNode != NULL)
