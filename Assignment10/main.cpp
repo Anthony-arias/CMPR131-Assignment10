@@ -85,7 +85,7 @@ void programTwo(void)
         cout << "\t" + string(100, char(205)) << endl;
         displayOptionTwoMenu();
 
-        int userInput = inputChar("\t\tOption: ");
+        char userInput = inputChar("\t\tOption: ");
         switch (userInput)
         {
         case '0': return;
@@ -117,7 +117,7 @@ void programTwo(void)
             pause("\n\t\t\Press any key to continue . . .");
             break;
         case 'g': case 'G':
-            try 
+            if (intTree.countNodes() != 0)
             {
                 int nodeCount = intTree.countNodes();
                 intTree.deleteTree();
@@ -127,7 +127,7 @@ void programTwo(void)
                     cout << "\n\t\tAll " << nodeCount << " nodes/leaves have been destroyed." << endl;
 
             }
-            catch (const invalid_argument& e) { cout << "\n\t\t" << e.what() << endl; }
+            else { cout << "\n\t\t\ERROR: bTree is empty." << endl; }
             pause("\n\t\t\Press any key to continue . . .");
             break;
         default: cout << "\t\tERROR-1A: Invalid input. Must be '0','A','B','C','D','E','F', or 'G'" << endl; pause("");

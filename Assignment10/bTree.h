@@ -155,7 +155,6 @@ public:
 	// Postcondition: delete the tree
 	void deleteTree(void)
 	{
-		if (root == NULL) throw invalid_argument("ERROR: bTree is empty.");
 		TreeNode<T>* currentNode = root;
 		iteratePostOrderDelete(currentNode);
 		root = NULL;
