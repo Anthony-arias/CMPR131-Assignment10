@@ -118,7 +118,11 @@ void programTwo(void)
             {
                 int nodeCount = intTree.countNodes();
                 intTree.deleteTree();
-                cout << "\n\t\t all " << nodeCount << " nodes/leaves have been destroyed." << endl;
+                if (nodeCount == 1)
+                    cout << "\n\t\t" << nodeCount << " node/leaf has been destroyed." << endl;
+                else
+                    cout << "\n\t\tAll " << nodeCount << " nodes/leaves have been destroyed." << endl;
+
             }
             catch (const invalid_argument& e) { cout << "\n\t\t" << e.what() << endl; }
             pause("\n\t\t\Press any key to continue . . .");
