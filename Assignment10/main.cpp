@@ -11,6 +11,8 @@
 #include "optionTwo.h"
 #include "optionThree.h"
 #include "input.h"
+#include "bTree.h"
+#include "binary_tree_node.h"
 
 void displayMainMenu(void);
 void mainMenu(void);
@@ -53,20 +55,27 @@ void mainMenu(void)
 }
 
 //PreCondition: NA
-//PostCondition: 
+//PostCondition: show the contents for option 1
 void programOne(void)
 {
     clearScreen();
     cout << "\t1> Tree of strings" << endl;
     cout << "\t" + string(100, char(196)) << endl;
-    /*stuff here*/
+    binary_tree_node<string>* root = new binary_tree_node<string>;
+    createdRoot(root);
+    createdBranches(root);
+    createdLeaves(root);
+    deleteTree(root);
+    pause("\n\t\t\Press Enter to continue . . .");
 }
 
 
 //PreCondition: NA
-//PostCondition: 
+//PostCondition: show the contents for option 2
 void programTwo(void)
 {
+    bTree<int> intTree = bTree<int>();
+    
     do
     {
         clearScreen();
@@ -78,41 +87,108 @@ void programTwo(void)
         switch (userInput)
         {
         case '0': return;
-        case 'a': case 'A': /*Function here*/ break;
-        case 'b': case 'B': /*Function here*/ break;
-        case 'c': case 'C': /*Function here*/ break;
-        case 'd': case 'D': /*Function here*/ break;
-        case 'e': case 'E': /*Function here*/ break;
-        case 'f': case 'F': /*Function here*/ break;
-        case 'g': case 'G': /*Function here*/ break;
+        case 'a': case 'A': intTree.push(inputInteger("\n\t\tEnter an integer: ")); break;
+        case 'b': case 'B': cout << "\n\t\tCount of Nodes = " << intTree.countNodes(); pause("\n\n\t\t\Press any key to continue . . .");  break;
+        case 'c': case 'C': 
+            try 
+            {
+                int input = inputInteger("\n\t\tEnter an integer key to search: ");
+                if (intTree.searchNode(input)) cout << "\n\t\t" << input << " is found." << endl;
+                else cout << "\n\t\t" << input << " cannot be found." << endl;
+            }
+            catch (const invalid_argument& e) { cout << "\n\t\t" << e.what() << endl; }
+            pause("\n\t\t\Press any key to continue . . .");
+            break;
+        case 'd': case 'D':
+            try { cout << "\n\t\tPre-order traversal of bTree with " << intTree.countNodes() << " node(s):" << endl; intTree.printPreOrder(); }
+            catch (const invalid_argument& e) { cout << "\n\t\t" << e.what() << endl; }
+            pause("\n\t\t\Press any key to continue . . .");
+            break;
+        case 'e': case 'E':
+            try { cout << "\n\t\tIn-order traversal of bTree with " << intTree.countNodes() << " node(s):" << endl; intTree.printInOrder(); }
+            catch (const invalid_argument& e) { cout << "\n\t\t" << e.what() << endl; }
+            pause("\n\t\t\Press any key to continue . . .");
+            break;
+        case 'f': case 'F':
+            try { cout << "\n\t\tPost-order traversal of bTree with " << intTree.countNodes() << " node(s):" << endl; intTree.printPostOrder(); }
+            catch (const invalid_argument& e) { cout << "\n\t\t" << e.what() << endl; }
+            pause("\n\t\t\Press any key to continue . . .");
+            break;
+        case 'g': case 'G':
+            try 
+            {
+                int nodeCount = intTree.countNodes();
+                intTree.deleteTree();
+                if (nodeCount == 1)
+                    cout << "\n\t\t" << nodeCount << " node/leaf has been destroyed." << endl;
+                else
+                    cout << "\n\t\tAll " << nodeCount << " nodes/leaves have been destroyed." << endl;
+
+            }
+            catch (const invalid_argument& e) { cout << "\n\t\t" << e.what() << endl; }
+            pause("\n\t\t\Press any key to continue . . .");
+            break;
         default: cout << "\t\tERROR-1A: Invalid input. Must be '0','A','B','C','D','E','F', or 'G'" << endl; pause("");
         }
 
     } while (true);
+
 }
 
 //PreCondition: NA
-//PostCondition: 
+//PostCondition: show the contents for option 3
 void programThree(void)
 {   
+    binary_tree_node<string>* taxonomy_root_ptr;
+    string fileName = "animals.txt";
+    ifstream infile;
+    ofstream outfile;
+
+    //populate tree
+    infile.open(fileName);
+    if (infile.is_open())
+    {
+        readTreeFromFile(taxonomy_root_ptr, infile);
+    }
+    else
+    {
+        taxonomy_root_ptr = default_tree();
+    }
+    infile.close();
+
     do
     {
         clearScreen();
         cout << "\t3> Animal Guessing Game" << endl;
         cout << "\t" + string(100, char(205)) << endl;
         displayOptionThreeMenu();
-
-        int userInput = inputChar("\t\tOption: ");
+      
+        char userInput = inputChar("\t\tOption: ");
         switch (userInput)
         {
         case '0': return;
-        case 'a': case 'A': /*Function here*/ break;
-        case 'b': case 'B': /*Function here*/ break;
-        default: cout << "\t\tERROR-1A: Invalid input. Must be '0','A','B'" << endl; pause("");
+        case 'a': case 'A': 				
+            play(taxonomy_root_ptr);
+            system("pause"); 
+            break;
+        case 'b': case 'B':
+            outfile.open(fileName);
+            if (outfile.is_open())
+            {
+                writeTreeToFile(taxonomy_root_ptr, outfile);
+            }
+            outfile.close();
+
+            cout << "\n\tCurrent taxonomy tree saved to file " << fileName << "\n";
+            system("pause");
+            break;
+        default: 
+            cout << "\t\tERROR-1A: Invalid input. Must be '0','A','B'" << endl; 
+            pause("");
         }
 
     } while (true);
-    
+    delete_tree<string>(taxonomy_root_ptr);
 }
 
 
